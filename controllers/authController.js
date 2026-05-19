@@ -4,13 +4,15 @@ const generateToken = require("../utils/generateToken");
 const getMe = async (req, res) => {
   try {
     const user = await User.findById(req.user._id).select("-password");
+    console.log("HIT!");
 
-    if(!user){
-      return res.status(404).json({message:""})
+    if (!user) {
+      return res.status(404).json({ message: "User no longer exists." });
     }
-    
+
+    res.json(user);
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json({ message: "Server authentication error." });
   }
 };
 

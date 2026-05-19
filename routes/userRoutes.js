@@ -1,11 +1,13 @@
 const express = require("express");
 const router = express.Router();
 
-const { syncCart, syncFavorite } = require("../controllers/userController");
+const { syncCart, syncFavorite, getCart } = require("../controllers/userController");
 
 const { protect } = require("../middleware/authMiddleware");
 
 router.post("/sync-cart", protect, syncCart);
 router.post("/sync-favorite", protect, syncFavorite);
+
+router.get("/get-cart", protect, getCart);
 
 module.exports = router;
